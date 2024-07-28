@@ -1,0 +1,25 @@
+get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
+###
+get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/gUeOwqbR_f6d0ILqLMhTr
+###
+
+POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
+Content-Type: application/json
+
+{
+  "name": "Allen Raymond",
+  "email": "nulla.ante@vestibul.co.uk",
+  "phone": "(992) 914-3792"
+}
+
+###
+PUT https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/gUeOwqbR_f6d0ILqLMhTr
+Content-Type: application/json
+
+{
+  "name": "Allen Raymond2"
+}
+###
+
+DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/gUeOwqbR_f6d0ILqLMhTr
+###

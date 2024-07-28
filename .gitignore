@@ -1,1 +1,4 @@
 /node_modules
+/nodejs-homework-template-master
+/dist
+.env
