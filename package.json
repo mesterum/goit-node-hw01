@@ -25,13 +25,12 @@
   },
   "dependencies": {
     "@typegoose/typegoose": "^12.6.0",
-    "commander": "^12.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-zod-safe": "^1.2.0",
     "mongoose": "^8.5.1",
     "morgan": "^1.10.0",
-    "nanoid": "^5.0.7",
     "zod": "^3.23.8"
   }
 }

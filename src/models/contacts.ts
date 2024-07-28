@@ -1,4 +1,4 @@
-
+/* 
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { nanoid } from 'nanoid';
@@ -54,11 +54,11 @@ export async function updateContact(contactId: string, contact: Partial<Contact>
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
   return newContact;
 }
-
+ */
 import { z } from 'zod';
 
 export const contactSchema = z.object({
-  id: z.string().nanoid(),
+  id: z.string().length(24).regex(/^[a-fA-F0-9]{24}$/),
   name: z.string(),
   email: z.string().email(),
   phone: z.string(),
