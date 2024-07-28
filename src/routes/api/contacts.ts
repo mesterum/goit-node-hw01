@@ -1,19 +1,18 @@
 import express, { NextFunction, Request, Response } from 'express'
 import validate from 'express-zod-safe';
-import { listContacts, getContactById, removeContact, addContact, contactSchema, updateContact } from '../../models/contacts.js' // 
-import { z } from 'zod';
+import { listContacts, getContactById, removeContact, addContact, contactSchema, updateContact, type Contact } from '../../models/contacts.js' // 
 
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
-  listContacts().then((contacts) => {
+  listContacts().then((contacts: Contact[]) => {
     res.json(contacts)
   })
 })
 
 router.get('/:contactId', validate({ params: { contactId: contactSchema.shape.id } }),
   async (req: Request, res: Response, next: NextFunction) => {
-    getContactById(req.params.contactId).then((contact) => {
+    getContactById(req.params.contactId).then((contact?: Contact) => {
       if (contact) {
         res.json(contact)
       } else {
@@ -24,14 +23,14 @@ router.get('/:contactId', validate({ params: { contactId: contactSchema.shape.id
 
 router.post('/', validate({ body: contactSchema.omit({ id: true }) }),
   async (req, res, next) => {
-    addContact(req.body).then((contact) => {
+    addContact(req.body).then((contact: Contact) => {
       res.json(contact)
     })
   })
 
 router.delete('/:contactId', validate({ params: { contactId: contactSchema.shape.id } }),
   async (req, res, next) => {
-    removeContact(req.params.contactId).then((success) => {
+    removeContact(req.params.contactId).then((success: boolean) => {
       if (success) {
         res.json({ message: 'Contact deleted' })
       } else {
@@ -45,7 +44,7 @@ router.put('/:contactId', validate({
   body: contactSchema.omit({ id: true }).partial(),
 }),
   async (req, res, next) => {
-    updateContact(req.params.contactId, req.body).then((contact) => {
+    updateContact(req.params.contactId, req.body).then((contact: Contact | null) => {
       if (contact) {
         res.json(contact)
       } else {
