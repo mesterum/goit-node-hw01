@@ -1,6 +1,6 @@
 get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
 ###
-get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/gUeOwqbR_f6d0ILqLMhTr
+get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a02b3679fe5dffdfafc64b
 ###
 
 POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
@@ -13,13 +13,20 @@ Content-Type: application/json
 }
 
 ###
-PUT https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/gUeOwqbR_f6d0ILqLMhTr
+PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218
 Content-Type: application/json
 
 {
-  "name": "Allen Raymond2"
+ "name": "Allen Raymond1"
+}
+###
+PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218/favorite
+Content-Type: application/json
+
+{
+ "favorite": true
 }
 ###
 
-DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/gUeOwqbR_f6d0ILqLMhTr
+DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218
 ###
