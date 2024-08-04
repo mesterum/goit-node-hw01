@@ -1,4 +1,4 @@
-import ContactSchema, { Contact } from './schemas/contacts.js'
+import ContactSchema, { Contact } from './schemas/contact.js'
 
 export const listContacts = (): Promise<Contact[]> =>
   ContactSchema.find()
