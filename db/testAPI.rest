@@ -30,3 +30,44 @@ Content-Type: application/json
 
 DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218
 ###
+POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/signup
+Content-Type: application/json
+
+{ 
+  "email": "a.cross1@gmail.com", 
+  "password": "examplepwd12345"
+}
+
+# {
+#   "email": "a.cross1@gmail.com",
+#   "subscription": "starter"
+# }
+###
+POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/login
+Content-Type: application/json
+
+{ 
+  "email": "a.cross1@gmail.com", 
+  "password": "examplepwd12345"
+}
+
+# {
+#   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzA1NDM1OSwiZXhwIjoxNzIzMDU3OTU5fQ.LFYVODCb8jZaug_1gHeTV1YtG7D6g5xFu-Rab5zZQ9w",
+#   "user": {
+#     "email": "a.cross1@gmail.com",
+#     "subscription": "starter"
+#   }
+# }
+###
+GET https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/current
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzA1NDM1OSwiZXhwIjoxNzIzMDU3OTU5fQ.LFYVODCb8jZaug_1gHeTV1YtG7D6g5xFu-Rab5zZQ9w
+
+# {
+#   "email": "a.cross1@gmail.com",
+#   "subscription": "starter"
+# }
+###
+GET https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzA1NDM1OSwiZXhwIjoxNzIzMDU3OTU5fQ.LFYVODCb8jZaug_1gHeTV1YtG7D6g5xFu-Rab5zZQ9w
+
+###
