@@ -1,17 +1,19 @@
+import { Types } from 'mongoose'
 import ContactSchema, { Contact } from './schemas/contact.js'
+import { DocumentType } from '@typegoose/typegoose'
 
-export const listContacts = (): Promise<Contact[]> =>
-  ContactSchema.find()
+export const listContacts = (owner: Types.ObjectId): Promise<Contact[]> =>
+  ContactSchema.find({ owner })
 
-export const getContactById = (id: string): Promise<Contact | null> =>
+export const getContactById = (id: string) =>
   ContactSchema.findOne({ _id: id })
 
 export const addContact = (contact: Omit<Contact, '_id'>) =>
   ContactSchema.create(contact)
 
-export const updateContact = (id: string, fields: Partial<Contact>) =>
-  ContactSchema.findByIdAndUpdate({ _id: id }, fields, { new: true })
+export const updateContact = (filter: Pick<DocumentType<Contact>, '_id' | 'owner'>, fields: Partial<Contact>) =>
+  ContactSchema.findOneAndUpdate(filter, fields, { new: true })
 
-export const removeContact = (id: string) =>
-  ContactSchema.findByIdAndDelete({ _id: id })
+export const removeContact = (filter: Pick<DocumentType<Contact>, '_id' | 'owner'>) =>
+  ContactSchema.findOneAndDelete(filter)
 

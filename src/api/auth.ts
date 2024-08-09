@@ -7,13 +7,11 @@ import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import UserSchema, { User } from '../service/schemas/user.js';
 import { secret } from '../config/passport.js';
-// const secret = process.env.SECRET
-// if (!secret) throw new Error("Please set the environment variable: SECRET");
 import type { RequestHandler } from 'express'
-import { Types } from 'mongoose';
+import type { DocumentType } from '@typegoose/typegoose';
 
-const auth: RequestHandler = (req, res, next) => {
-  passport.authenticate('jwt', { session: false }, (err: any, user?: User) => {
+export const auth: RequestHandler = (req, res, next) => {
+  passport.authenticate('jwt', { session: false }, (err: any, user?: DocumentType<User>) => {
     if (!user || err) {
       return res.status(401).json({
         status: 'error',
@@ -83,9 +81,7 @@ router.post('/login', validate({ body: userSchema }), async (req, res, next) => 
 })
 
 router.get('/logout', auth, (req, res, next) => {
-  const user = req.user as User & {
-    _id: Types.ObjectId;
-  }
+  const user = req.user as DocumentType<User>
   user.token = null
   UserSchema.findByIdAndUpdate(user._id, { token: null })
   res.status(204).end()
