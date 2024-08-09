@@ -1,14 +1,8 @@
 import { mongoose } from "@typegoose/typegoose";
+import './config/passport.js'
+
+import { uriDb, PORT } from './config/passport.js';
 import app from "./app.js";
-import { config } from "dotenv";
-config();
-
-const PORT = process.env.PORT || 3000
-const uriDb = process.env.DB_HOST
-
-if (!uriDb) {
-  throw new Error("Please set the environment variable: DB_HOST");
-}
 
 const connection = mongoose.connect(uriDb)
 connection

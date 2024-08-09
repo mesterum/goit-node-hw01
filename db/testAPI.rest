@@ -1,9 +1,12 @@
 get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
 ###
-get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a02b3679fe5dffdfafc64b
+get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f8d080b4092880d59c06
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
 ###
 
 POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
 Content-Type: application/json
 
 {
@@ -13,14 +16,16 @@ Content-Type: application/json
 }
 
 ###
-PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218
+PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f8d080b4092880d59c06
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
 Content-Type: application/json
 
 {
  "name": "Allen Raymond1"
 }
 ###
-PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218/favorite
+PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f9c680b4092880d59c0f/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
 Content-Type: application/json
 
 {
@@ -28,5 +33,47 @@ Content-Type: application/json
 }
 ###
 
-DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66a69ac23b99ae2818730218
+DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f8d080b4092880d59c06
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+###
+POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/signup
+Content-Type: application/json
+
+{ 
+  "email": "a.cross1@gmail.com", 
+  "password": "examplepwd12345"
+}
+
+# {
+#   "email": "a.cross1@gmail.com",
+#   "subscription": "starter"
+# }
+###
+POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/login
+Content-Type: application/json
+
+{ 
+  "email": "a.cross1@gmail.com", 
+  "password": "examplepwd12345"
+}
+
+# {
+#   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00",
+#   "user": {
+#     "email": "a.cross1@gmail.com",
+#     "subscription": "starter"
+#   }
+# }
+###
+GET https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/current
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+
+# {
+#   "email": "a.cross1@gmail.com",
+#   "subscription": "starter"
+# }
+###
+GET https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+
 ###

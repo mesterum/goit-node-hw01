@@ -1,6 +1,10 @@
 import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
+import { User } from "./user.js";
 
 export class Contact {
+  @prop({ ref: () => User })
+  owner?: Ref<User>;
+
   @prop({ required: [true, 'Set name for contact'] })
   name!: string;
 
