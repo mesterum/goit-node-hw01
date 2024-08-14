@@ -1,3 +1,4 @@
+import './globals.js'
 import { mongoose } from "@typegoose/typegoose";
 import './config/passport.js'
 

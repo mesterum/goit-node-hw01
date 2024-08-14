@@ -4,6 +4,7 @@ import cors from 'cors'
 
 import contactsRouter from './api/contacts.js'
 import authRouter from './api/auth.js'
+import path from 'path'
 
 const app = express()
 
@@ -12,6 +13,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api/contacts', contactsRouter)
 app.use('/api/users', authRouter)
