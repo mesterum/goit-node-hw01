@@ -1,12 +1,34 @@
-get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
-###
-get https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f8d080b4092880d59c06
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+@baseUrl = https://xc8jbrf4-3000.euw.devtunnels.ms/api/
+
+# @name login
+POST {{baseUrl}}users/login
+Content-Type: application/json
+
+{ 
+  "email": "a.cross1@gmail.com", 
+  "password": "examplepwd1MmUyY2E1NzFiZmViM2ExNy"
+}
+
+# {
+#   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzYzMzg5MSwiZXhwIjoxNzIzNjM3NDkxfQ.IQuq3oVusYimY516OGB8UTmxedlnrojVAgntHe8iufE",
+#   "user": {
+#     "email": "a.cross1@gmail.com",
+#     "subscription": "starter"
+#   }
+# }
 ###
 
-POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+@authToken = Authorization: Bearer {{login.response.body.$.token}}
+
+get {{baseUrl}}contacts
+{{authToken}}
+###
+get {{baseUrl}}contacts/66b5f8d080b4092880d59c06
+{{authToken}}
+###
+
+POST {{baseUrl}}contacts
+{{authToken}}
 Content-Type: application/json
 
 {
@@ -16,16 +38,16 @@ Content-Type: application/json
 }
 
 ###
-PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f8d080b4092880d59c06
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+PATCH {{baseUrl}}contacts/66b5f8d080b4092880d59c06
+{{authToken}}
 Content-Type: application/json
 
 {
  "name": "Allen Raymond1"
 }
 ###
-PATCH https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f9c680b4092880d59c0f/favorite
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+PATCH {{baseUrl}}contacts/66b5f9c680b4092880d59c0f/favorite
+{{authToken}}
 Content-Type: application/json
 
 {
@@ -33,15 +55,15 @@ Content-Type: application/json
 }
 ###
 
-DELETE https://xc8jbrf4-3000.euw.devtunnels.ms/api/contacts/66b5f8d080b4092880d59c06
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+DELETE {{baseUrl}}contacts/66b5f8d080b4092880d59c06
+{{authToken}}
 ###
-POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/signup
+POST {{baseUrl}}users/signup
 Content-Type: application/json
 
 { 
   "email": "a.cross1@gmail.com", 
-  "password": "examplepwd12345"
+  "password": "examplepwd1MmUyY2E1NzFiZmViM2ExNy"
 }
 
 # {
@@ -49,31 +71,30 @@ Content-Type: application/json
 #   "subscription": "starter"
 # }
 ###
-POST https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/login
-Content-Type: application/json
-
-{ 
-  "email": "a.cross1@gmail.com", 
-  "password": "examplepwd12345"
-}
-
-# {
-#   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00",
-#   "user": {
-#     "email": "a.cross1@gmail.com",
-#     "subscription": "starter"
-#   }
-# }
-###
-GET https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/current
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+GET {{baseUrl}}users/current
+{{authToken}}
 
 # {
 #   "email": "a.cross1@gmail.com",
 #   "subscription": "starter"
 # }
 ###
-GET https://xc8jbrf4-3000.euw.devtunnels.ms/api/users/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjNhNWE1MmUyY2E1NzFiZmViM2ExNyIsImlhdCI6MTcyMzIwMTA4MSwiZXhwIjoxNzIzMjA0NjgxfQ.nXwLbk7Gk46dUq8JBu5NEUbWbd2OoGGjFBXEj1MVH00
+GET {{baseUrl}}users/logout
+{{authToken}}
 
 ###
+
+# @name avatar
+PATCH {{baseUrl}}users/avatars
+{{authToken}}
+Content-Type: multipart/form-data; boundary=1MmUyY2E1NzFiZmViM2ExNy
+
+--1MmUyY2E1NzFiZmViM2ExNy
+Content-Disposition: form-data; name="avatar"; filename="photo.jpg"
+Content-Type: image/jpeg
+
+< ./photo.jpg
+--1MmUyY2E1NzFiZmViM2ExNy--
+###
+
+GET https://xc8jbrf4-3000.euw.devtunnels.ms/{{avatar.response.body.$.avatarURL}}
