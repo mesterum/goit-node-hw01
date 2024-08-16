@@ -45,7 +45,6 @@ export function setAvatarRoute(router: Router) {
     const avatarURL = path.join("/avatars", filename + '.jpg');
     const user = req.user as DocumentType<User>;
     try {
-      await fs.mkdir(uploadDir, { recursive: true });
       (await Jimp.read(temporaryName))
         .resize(250, 250) // resize
         .quality(70) // set JPEG quality
