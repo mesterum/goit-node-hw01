@@ -2,3 +2,4 @@
 /nodejs-homework-template-master
 /dist
 .env
+.vscode/settings.json

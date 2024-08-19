@@ -25,6 +25,8 @@ export const auth: RequestHandler = (req, res, next) => {
   })(req, res, next)
 }
 
+setAvatarRoute(router)
+
 router.post('/signup', validate({ body: userSchema }), async (req, res, next) => {
   const { email, password } = req.body
   const user = await UserSchema.findOne({ email })
@@ -40,6 +42,7 @@ router.post('/signup', validate({ body: userSchema }), async (req, res, next) =>
     const newUser = new UserSchema({ email })
     await newUser.setPassword(password)
     // console.log(newUser.password);
+    newUser.avatarURL = genGravatar(email)
     await newUser.save()
     res.status(201).json({
       email,
@@ -75,7 +78,8 @@ router.post('/login', validate({ body: userSchema }), async (req, res, next) => 
     token,
     "user": {
       "email": user.email,
-      "subscription": user.subscription
+      "subscription": user.subscription,
+      "avatarURL": user.avatarURL
     }
   })
 })
@@ -83,13 +87,30 @@ router.post('/login', validate({ body: userSchema }), async (req, res, next) => 
 router.get('/logout', auth, (req, res, next) => {
   const user = req.user as DocumentType<User>
   user.token = null
-  UserSchema.findByIdAndUpdate(user._id, { token: null })
-  res.status(204).end()
+  // UserSchema.findByIdAndUpdate(user._id, { token: null })
+  user.save()
+  res.status(204)//.end()
 })
 
 router.get('/current', auth, (req, res, next) => {
-  const { email, subscription } = req.user as User
-  res.json({ email, subscription })
+  const user = req.user as DocumentType<User>
+  let { email, subscription, avatarURL } = user
+  if (!avatarURL) {
+    avatarURL = genGravatar(email)
+    // console.log(avatarURL);
+    user.avatarURL = avatarURL
+    user.save()
+  }
+  res.json({ email, subscription, avatarURL })
 })
 
 export default router
+
+import crypto from "node:crypto"
+import { setAvatarRoute } from './upload.js';
+function genGravatar(email: string) {
+  const emailHash = crypto.createHash('sha256').update(email.trim().toLowerCase()).digest('hex');
+  return `https://gravatar.com/avatar/${emailHash}?s=250&d=robohash`
+}
+
+//https://www.dicebear.com/why-dicebear/
