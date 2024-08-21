@@ -25,8 +25,6 @@ export const auth: RequestHandler = (req, res, next) => {
   })(req, res, next)
 }
 
-setAvatarRoute(router)
-
 router.post('/signup', validate({ body: userSchema }), async (req, res, next) => {
   const { email, password } = req.body
   const user = await UserSchema.findOne({ email })
@@ -108,6 +106,8 @@ export default router
 
 import crypto from "node:crypto"
 import { setAvatarRoute } from './upload.js';
+setAvatarRoute(router)
+
 function genGravatar(email: string) {
   const emailHash = crypto.createHash('sha256').update(email.trim().toLowerCase()).digest('hex');
   return `https://gravatar.com/avatar/${emailHash}?s=250&d=robohash`

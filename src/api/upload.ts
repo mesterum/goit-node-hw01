@@ -58,7 +58,7 @@ export function setAvatarRoute(router: Router) {
     } catch (err) {
       return next(err);
     } finally {
-      await fs.unlink(temporaryName);
+      fs.unlink(temporaryName);
     }
   });
 }
