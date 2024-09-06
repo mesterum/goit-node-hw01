@@ -9,6 +9,7 @@ import UserSchema, { User } from '../service/schemas/user.js';
 import { secret } from '../config/passport.js';
 import type { RequestHandler } from 'express'
 import type { DocumentType } from '@typegoose/typegoose';
+import { z, ZodString } from 'zod';
 
 export const auth: RequestHandler = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err: any, user?: DocumentType<User>) => {
@@ -24,8 +25,6 @@ export const auth: RequestHandler = (req, res, next) => {
     next()
   })(req, res, next)
 }
-
-setAvatarRoute(router)
 
 router.post('/signup', validate({ body: userSchema }), async (req, res, next) => {
   const { email, password } = req.body
@@ -43,6 +42,7 @@ router.post('/signup', validate({ body: userSchema }), async (req, res, next) =>
     await newUser.setPassword(password)
     // console.log(newUser.password);
     newUser.avatarURL = genGravatar(email)
+    sendVerificationEmail(email, newUser.verificationToken!)
     await newUser.save()
     res.status(201).json({
       email,
@@ -51,6 +51,45 @@ router.post('/signup', validate({ body: userSchema }), async (req, res, next) =>
   } catch (error) {
     next(error)
   }
+})
+
+router.get('/verify/:verificationToken', validate({ params: { verificationToken: z.string().length(16) } }), async (req, res, next) => {
+  const { verificationToken } = req.params
+  const user = await UserSchema.findOne({ verificationToken, isVerified: false })
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found or allready verified'
+    })
+  }
+  // user.verificationToken = ''
+  user.isVerified = true
+  user.save()
+  res.status(200).json({
+    message: 'Verification successful'
+  })
+})
+router.post('/verify', validate({ body: userSchema.pick({ email: true }) }), async (req, res, next) => {
+  const { email } = req.body
+  const user = await UserSchema.findOne({ email })
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found'
+    })
+  }
+  if (user.isVerified) {
+    return res.status(400).json({
+      message: 'Verification has already been passed'
+    })
+  }
+  await sendVerificationEmail(email, user.verificationToken!)
+  // try {
+  // } catch (error) {
+  //   console.log(error);
+  //   next(error)
+  // }
+  res.status(200).json({
+    message: 'Verification email sent'
+  })
 })
 
 router.post('/login', validate({ body: userSchema }), async (req, res, next) => {
@@ -108,6 +147,9 @@ export default router
 
 import crypto from "node:crypto"
 import { setAvatarRoute } from './upload.js';
+import { sendVerificationEmail } from '../controller/auth.js';
+setAvatarRoute(router)
+
 function genGravatar(email: string) {
   const emailHash = crypto.createHash('sha256').update(email.trim().toLowerCase()).digest('hex');
   return `https://gravatar.com/avatar/${emailHash}?s=250&d=robohash`

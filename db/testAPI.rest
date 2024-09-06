@@ -5,8 +5,8 @@ POST {{baseUrl}}users/login
 Content-Type: application/json
 
 { 
-  "email": "a.cross1@gmail.com", 
-  "password": "examplepwd1MmUyY2E1NzFiZmViM2ExNy"
+  "email": "outlook_5CC4867C4B04E2E3@outlook.com", 
+  "password": "examplepwd12345"
 }
 
 # {
@@ -62,8 +62,8 @@ POST {{baseUrl}}users/signup
 Content-Type: application/json
 
 { 
-  "email": "a.cross1@gmail.com", 
-  "password": "examplepwd1MmUyY2E1NzFiZmViM2ExNy"
+  "email": "outlook_5CC4867C4B04E2E3@outlook.com", 
+  "password": "examplepwd12345"
 }
 
 # {
@@ -98,3 +98,10 @@ Content-Type: image/jpeg
 ###
 
 GET https://xc8jbrf4-3000.euw.devtunnels.ms/{{avatar.response.body.$.avatarURL}}
+###
+POST {{baseUrl}}users/verify
+Content-Type: application/json
+
+{ 
+  "email": "outlook_5CC4867C4B04E2E3@outlook.com"
+}
